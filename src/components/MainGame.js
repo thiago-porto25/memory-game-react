@@ -125,7 +125,7 @@ export default function MainGame({ setScore, setBestScore, score, bestScore }) {
           style={{ opacity: opacity }}
         >
           <ImageContainer>
-            <Image src={`/images/${randNumber}.jpg`} alt={names[randNumber]} />
+            <Image src={`./images/${randNumber}.jpg`} alt={names[randNumber]} />
           </ImageContainer>
           <NameContainer>
             <Name>
