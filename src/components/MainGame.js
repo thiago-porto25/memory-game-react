@@ -19,8 +19,7 @@ const Card = styled.div`
 const Inner = styled.div`
   display: grid;
   padding: 2rem 2rem 2rem 2rem;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
   gap: 20px;
 `
 
@@ -70,7 +69,7 @@ export default function MainGame({ setScore, setBestScore, score, bestScore }) {
     let numbersUsed = []
     function generateRandNumber() {
       while (true) {
-        let generatedNum = Math.floor(Math.random() * 12)
+        let generatedNum = Math.floor(Math.random() * 17)
         if (numbersUsed.indexOf(generatedNum) === -1) {
           numbersUsed.push(generatedNum)
           return generatedNum
