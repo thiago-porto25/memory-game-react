@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { names } from '../data/names'
 
@@ -14,6 +14,30 @@ const Card = styled.div`
   width: 11rem;
   min-width: 11rem;
   padding-top: 20px;
+  transition: 150ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  cursor: pointer;
+  animation: fadeIn 200ms;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 const Inner = styled.div`
@@ -49,10 +73,21 @@ const NameContainer = styled.div`
 
 export default function MainGame({ setScore, setBestScore, score, bestScore }) {
   const [clickedChars, setClickedChars] = useState([])
+  const [opacity, setOpacity] = useState(1)
+  const [waitingTrans, setWaitingTrans] = useState(false)
+
+  useEffect(() => {
+    if (opacity === 0 && waitingTrans === true)
+      setTimeout(() => {
+        setWaitingTrans(false)
+        setOpacity(1)
+      }, 150)
+  }, [opacity, waitingTrans])
 
   const handleClick = ({ target }) => {
+    setOpacity(0)
+    setWaitingTrans(true)
     const clickedName = target.getAttribute('name')
-
     if (clickedChars.indexOf(clickedName) === -1) {
       const newPeople = clickedChars.map((item) => item)
       newPeople.push(clickedName)
@@ -69,21 +104,22 @@ export default function MainGame({ setScore, setBestScore, score, bestScore }) {
     let numbersUsed = []
     function generateRandNumber() {
       while (true) {
-        let generatedNum = Math.floor(Math.random() * 17)
+        let generatedNum = Math.floor(Math.random() * 18)
         if (numbersUsed.indexOf(generatedNum) === -1) {
           numbersUsed.push(generatedNum)
           return generatedNum
-        }
-        continue
+        } else continue
       }
     }
     return names.map((item, i) => {
       const randNumber = generateRandNumber()
       return (
         <Card
+          className="card"
           onClick={handleClick}
           name={names[randNumber]}
           key={`${item}-${i}`}
+          style={{ opacity: opacity }}
         >
           <ImageContainer>
             <Image src={`/images/${randNumber}.jpg`} alt={names[randNumber]} />
@@ -99,7 +135,9 @@ export default function MainGame({ setScore, setBestScore, score, bestScore }) {
   }
   return (
     <Container>
-      <Inner>{createCardsRandomly()}</Inner>
+      <Inner style={{ opacity: !waitingTrans ? 1 : 0 }}>
+        {createCardsRandomly()}
+      </Inner>
     </Container>
   )
 }

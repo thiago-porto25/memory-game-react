@@ -11,4 +11,10 @@ export const names = [
   'malphite',
   'zed',
   'ivern',
+  'kalista',
+  'lee sin',
+  'lucian',
+  'renekton',
+  'azir',
+  'tristana',
 ]
