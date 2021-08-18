@@ -11,18 +11,32 @@ const Container = styled.header`
 `
 
 const Inner = styled.div`
-  width: 50%;
+  width: 60%;
+  color: #152238;
 
   &:last-of-type {
+    width: 40%;
     display: flex;
     justify-content: flex-end;
   }
 `
 
-const Title = styled.p``
+const Title = styled.p`
+  margin-top: 5px;
+  margin-left: 15px;
+  font-size: 50px;
+  font-weight: bolder;
+`
 
 const Score = styled.p`
+  font-size: 35px;
+  font-weight: bold;
   padding-right: 20px;
+  margin-top: 10px;
+
+  &:first-of-type {
+    padding-right: 40px;
+  }
 `
 
 export default function Header({ score, bestScore }) {

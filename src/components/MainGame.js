@@ -61,6 +61,9 @@ const ImageContainer = styled.div`
 `
 
 const Name = styled.p`
+  margin-top: 5px;
+  font-size: 25px;
+  font-weight: bold;
   color: white;
 `
 
