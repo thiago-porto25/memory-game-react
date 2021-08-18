@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { names } from '../data/names'
 
 const Container = styled.main`
   background-color: #dddddd;
 `
 
 const Card = styled.div`
-  background-color: #1c2e4a;
+  background-color: #23395d;
   border-radius: 5px;
   height: 15rem;
   min-height: 15rem;
@@ -15,7 +16,7 @@ const Card = styled.div`
 `
 
 const Inner = styled.div`
-  padding-top: 5rem;
+  padding: 5rem 2rem 2rem 2rem;
 `
 
 const Image = styled.img`
@@ -23,12 +24,22 @@ const Image = styled.img`
 `
 
 const ImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 80%;
+  width: 100%;
 `
 
-const Name = styled.p``
+const Name = styled.p`
+  color: white;
+`
 
-const NameContainer = styled.div``
+const NameContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 export default function MainGame({ setScore, setBestScore }) {
   const [clickedChars, setClickedChars] = useState([])
@@ -40,7 +51,7 @@ export default function MainGame({ setScore, setBestScore }) {
             <Image src={`/images/${1}.jpg`} />
           </ImageContainer>
           <NameContainer>
-            <Name>Diana</Name>
+            <Name>{names[1][0].toUpperCase() + names[1].slice(1)}</Name>
           </NameContainer>
         </Card>
       </Inner>
