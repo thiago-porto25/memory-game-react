@@ -45,6 +45,7 @@ const Inner = styled.div`
   padding: 2rem 2rem 2rem 2rem;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
   gap: 20px;
+  justify-items: center;
 `
 
 const Image = styled.img`
