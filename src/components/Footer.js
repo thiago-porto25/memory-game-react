@@ -4,8 +4,6 @@ import styled from 'styled-components'
 const Container = styled.footer`
   width: 100%;
   background-color: #152238dd;
-  position: fixed;
-  bottom: 0;
 `
 
 const Link = styled.a`
@@ -19,7 +17,7 @@ const Link = styled.a`
 const Text = styled.p`
   user-select: none;
   width: fit-content;
-  padding: 5px 0 5px 0;
+  padding: 15px 0 15px 0;
   margin: auto;
   color: white;
 `

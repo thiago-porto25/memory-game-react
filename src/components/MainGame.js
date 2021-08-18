@@ -13,10 +13,15 @@ const Card = styled.div`
   min-height: 15rem;
   width: 11rem;
   min-width: 11rem;
+  padding-top: 20px;
 `
 
 const Inner = styled.div`
-  padding: 5rem 2rem 2rem 2rem;
+  display: grid;
+  padding: 2rem 2rem 2rem 2rem;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
 `
 
 const Image = styled.img`
@@ -29,6 +34,7 @@ const ImageContainer = styled.div`
   align-items: center;
   height: 80%;
   width: 100%;
+  pointer-events: none;
 `
 
 const Name = styled.p`
@@ -39,22 +45,62 @@ const NameContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
 `
 
-export default function MainGame({ setScore, setBestScore }) {
+export default function MainGame({ setScore, setBestScore, score, bestScore }) {
   const [clickedChars, setClickedChars] = useState([])
-  return (
-    <Container>
-      <Inner>
-        <Card>
+
+  const handleClick = ({ target }) => {
+    const clickedName = target.getAttribute('name')
+
+    if (clickedChars.indexOf(clickedName) === -1) {
+      const newPeople = clickedChars.map((item) => item)
+      newPeople.push(clickedName)
+      setScore((prev) => prev + 1)
+      setClickedChars(newPeople)
+    } else {
+      if (score > bestScore) setBestScore(score)
+      setScore(0)
+      setClickedChars([])
+    }
+  }
+
+  const createCardsRandomly = () => {
+    let numbersUsed = []
+    function generateRandNumber() {
+      while (true) {
+        let generatedNum = Math.floor(Math.random() * 12)
+        if (numbersUsed.indexOf(generatedNum) === -1) {
+          numbersUsed.push(generatedNum)
+          return generatedNum
+        }
+        continue
+      }
+    }
+    return names.map((item, i) => {
+      const randNumber = generateRandNumber()
+      return (
+        <Card
+          onClick={handleClick}
+          name={names[randNumber]}
+          key={`${item}-${i}`}
+        >
           <ImageContainer>
-            <Image src={`/images/${1}.jpg`} />
+            <Image src={`/images/${randNumber}.jpg`} alt={names[randNumber]} />
           </ImageContainer>
           <NameContainer>
-            <Name>{names[1][0].toUpperCase() + names[1].slice(1)}</Name>
+            <Name>
+              {names[randNumber][0].toUpperCase() + names[randNumber].slice(1)}
+            </Name>
           </NameContainer>
         </Card>
-      </Inner>
+      )
+    })
+  }
+  return (
+    <Container>
+      <Inner>{createCardsRandomly()}</Inner>
     </Container>
   )
 }

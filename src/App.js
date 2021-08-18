@@ -14,7 +14,12 @@ function App() {
       <GlobalStyles />
       <AppContainer>
         <Header score={score} bestScore={bestScore} />
-        <MainGame setScore={setScore} setBestScore={setBestScore} />
+        <MainGame
+          setScore={setScore}
+          setBestScore={setBestScore}
+          score={score}
+          bestScore={bestScore}
+        />
         <Footer />
       </AppContainer>
     </>
